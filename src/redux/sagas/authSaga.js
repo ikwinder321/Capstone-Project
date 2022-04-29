@@ -98,7 +98,7 @@ function* authSaga({ type, payload }) {
           address: '',
           basket: [],
           mobile: { data: {} },
-          role: 'USER',
+          role: 'ADMIN',
           dateJoined: ref.user.metadata.creationTime || new Date().getTime()
         };
 
@@ -151,7 +151,7 @@ function* authSaga({ type, payload }) {
         yield put(setBasketItems(user.basket));
         yield put(signInSuccess({
           id: payload.uid,
-          role: user.role,
+          role: 'ADMIN',
           provider: payload.providerData[0].providerId
         }));
       } else if (payload.providerData[0].providerId !== 'password' && !snapshot.data()) {
@@ -164,14 +164,14 @@ function* authSaga({ type, payload }) {
           address: '',
           basket: [],
           mobile: { data: {} },
-          role: 'USER',
+          role: 'ADMIN',
           dateJoined: payload.metadata.creationTime
         };
         yield call(firebase.addUser, payload.uid, user);
         yield put(setProfile(user));
         yield put(signInSuccess({
           id: payload.uid,
-          role: user.role,
+          role: 'ADMIN',
           provider: payload.providerData[0].providerId
         }));
       }

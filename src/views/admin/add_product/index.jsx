@@ -9,7 +9,7 @@ const ProductForm = lazy(() => import('../components/ProductForm'));
 
 const AddProduct = () => {
   useScrollTop();
-  useDocumentTitle('Add New Product | yeasin-shop');
+  useDocumentTitle('Add New Product | Trash To Treasure');
   const isLoading = useSelector((state) => state.app.loading);
   const dispatch = useDispatch();
 
@@ -18,7 +18,7 @@ const AddProduct = () => {
   };
 
   return (
-    <div className="product-form-container">
+    <div className="product-form-container" style={{width:'1400px'}}>
       <h2>Add New Product</h2>
       <Suspense fallback={(
         <div className="loader" style={{ minHeight: '80vh' }}>

@@ -1,11 +1,11 @@
 import { MessageDisplay } from 'components/common';
 import { ProductShowcaseGrid } from 'components/product';
 import { useDocumentTitle, useRecommendedProducts, useScrollTop } from 'hooks';
-import bannerImg from 'images/banner-girl-1.png';
+import bannerImg from 'images/scrap/brokenmug.jpg';
 import React from 'react';
 
 const RecommendedProducts = () => {
-  useDocumentTitle('Recommended Products | yeasin-shop');
+  useDocumentTitle('Scrapyard Products | Trash To Treasure');
   useScrollTop();
 
   const {
@@ -20,7 +20,7 @@ const RecommendedProducts = () => {
       <div className="featured">
         <div className="banner">
           <div className="banner-desc">
-            <h1>Recommended Products</h1>
+            <h1>Scrapyard Products</h1>
           </div>
           <div className="banner-img">
             <img src={bannerImg} alt="" />

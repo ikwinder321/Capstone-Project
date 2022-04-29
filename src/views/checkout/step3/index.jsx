@@ -1,4 +1,4 @@
-import { CHECKOUT_STEP_1 } from 'constants/routes';
+import { CHECKOUT_STEP_1, SHOP } from 'constants/routes';
 import { Form, Formik } from 'formik';
 import { displayActionMessage } from 'helpers/utils';
 import { useDocumentTitle, useScrollTop } from 'hooks';
@@ -42,7 +42,7 @@ const Payment = ({ shipping, payment, subtotal }) => {
   };
 
   const onConfirm = () => {
-    displayActionMessage('Feature not ready yet :)', 'info');
+    displayActionMessage('Order Successful :)', 'info');
   };
 
   if (!shipping || !shipping.isDone) {
@@ -57,7 +57,8 @@ const Payment = ({ shipping, payment, subtotal }) => {
         validationSchema={FormSchema}
         validate={(form) => {
           if (form.type === 'paypal') {
-            displayActionMessage('Feature not ready yet :)', 'info');
+
+    displayActionMessage('Order Successful :)', 'info');
           }
         }}
         onSubmit={onConfirm}

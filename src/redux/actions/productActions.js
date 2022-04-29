@@ -6,6 +6,7 @@ import {
   EDIT_PRODUCT,
   EDIT_PRODUCT_SUCCESS,
   GET_PRODUCTS,
+  GET_ORDERS,
   GET_PRODUCTS_SUCCESS,
   REMOVE_PRODUCT,
   REMOVE_PRODUCT_SUCCESS,
@@ -16,6 +17,11 @@ import {
 export const getProducts = (lastRef) => ({
   type: GET_PRODUCTS,
   payload: lastRef
+});
+
+export const getOrders = (lastRef) =>({
+  type:GET_ORDERS,
+  payload:lastRef
 });
 
 export const getProductsSuccess = (products) => ({

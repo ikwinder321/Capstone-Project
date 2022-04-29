@@ -9,14 +9,32 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { StepTracker } from '../components';
 import withCheckout from '../hoc/withCheckout';
+import {
+  CustomColorInput, CustomCreatableSelect, CustomInput, CustomTextarea
+} from 'components/formik';
+import {
+  Field, FieldArray, Form, Formik
+} from 'formik';
+import firebase from 'services/firebase';
 
 const OrderSummary = ({ basket, subtotal }) => {
-  useDocumentTitle('Check Out Step 1 | yeasin-shop');
+  useDocumentTitle('Check Out Step 1 | Trash To Treasure');
   useScrollTop();
   const dispatch = useDispatch();
   const history = useHistory();
   const onClickPrevious = () => history.push('/');
-  const onClickNext = () => history.push(CHECKOUT_STEP_2);
+  const onClickNext = () => {
+    const em = document.getElementById('orderedBy').value;
+    if(em == null || em == '') {
+      alert('please enter the email');
+      return;
+    }
+    history.push(CHECKOUT_STEP_2);
+    basket.map((product)=>{
+       const canBe = firebase.addSeller(product.addedBy, product);
+       const canBeTwo = firebase.addOrders(document.getElementById('orderedBy').value,product);
+    })
+  }
 
   return (
     <div className="checkout">
@@ -36,6 +54,15 @@ const OrderSummary = ({ basket, subtotal }) => {
           ))}
         </div>
         <br />
+        <div className="product-form-field">
+                <h5>Your Email: </h5>
+                <input
+                  name="orderedBy"
+                  id="orderedBy"
+                  label="Your Email"
+                  type={Text}
+                />
+              </div>
         <div className="basket-total text-right">
           <p className="basket-total-title">Subtotal:</p>
           <h2 className="basket-total-amount">{displayMoney(subtotal)}</h2>

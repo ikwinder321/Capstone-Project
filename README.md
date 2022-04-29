@@ -1,6 +1,6 @@
 "# ecommerce-react" 
 "# ecommerce-react" 
-# yeasin-shop with react  | E-commerce react app
+# Trash To Treasure with react  | E-commerce react app
 Simple ecommerce react js app with firebase [typescript].
 ![Firebase Deploy]
 

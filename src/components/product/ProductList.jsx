@@ -15,7 +15,7 @@ const ProductList = (props) => {
 
   const fetchProducts = () => {
     setFetching(true);
-    dispatch(getProducts(products.lastRefKey));
+    dispatch(getProducts(products.lastRefKey,"orders"));
   };
 
   useEffect(() => {

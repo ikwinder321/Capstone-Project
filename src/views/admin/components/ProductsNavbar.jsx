@@ -10,19 +10,18 @@ const ProductsNavbar = (props) => {
   const history = useHistory();
 
   return (
-    <div className="product-admin-header">
+    <div className="product-admin-header" style={{marginTop:'100px'}}>
       <h3 className="product-admin-header-title">
         Products &nbsp;
         (
         {`${productsCount} / ${totalProductsCount}`}
         )
       </h3>
-      <SearchBar />
             &nbsp;
       <FiltersToggle>
         <button className="button-muted button-small" type="button">
           <FilterOutlined />
-          &nbsp;More Filters
+          &nbsp; Filters
         </button>
       </FiltersToggle>
       <button

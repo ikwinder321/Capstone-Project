@@ -8,16 +8,17 @@ import {
   Field, FieldArray, Form, Formik
 } from 'formik';
 import { useFileHandler } from 'hooks';
-import PropType from 'prop-types';
+import PropType from 'prop-types'; 
 import React from 'react';
 import * as Yup from 'yup';
+import firebase from 'services/firebase';
+
+import { call, put, select } from 'redux-saga/effects';
 
 // Default brand names that I used. You can use what you want
 const brandOptions = [
-  { value: 'Salt Maalat', label: 'Salt Maalat' },
-  { value: 'Betsin Maalat', label: 'Betsin Maalat' },
-  { value: 'Sexbomb', label: 'Sexbomb' },
-  { value: 'Black Kibal', label: 'Black Kibal' }
+  { value: 'Creative', label: 'Creative' },
+  { value: 'Scrapyard', label: 'Scrapyard' }
 ];
 
 const FormSchema = Yup.object().shape({
@@ -30,6 +31,7 @@ const FormSchema = Yup.object().shape({
     .positive('Price is invalid.')
     .integer('Price should be an integer.')
     .required('Price is required.'),
+  addedBy: Yup.string().required('Email is required'),
   description: Yup.string()
     .required('Description is required.'),
   maxQuantity: Yup.number()
@@ -48,7 +50,8 @@ const FormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, 'Please add a default color for this product.')
 });
-
+// const getUserCur = call(firebase.getCurrentUser);
+// const snapshot =  call(firebase.getUser, payload.uid);
 const ProductForm = ({ product, onSubmit, isLoading }) => {
   const initFormikValues = {
     name: product?.name || '',
@@ -58,6 +61,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
     description: product?.description || '',
     keywords: product?.keywords || [],
     sizes: product?.sizes || [],
+    addedBy: product.addedBy,
     isFeatured: product?.isFeatured || false,
     isRecommended: product?.isRecommended || false,
     availableColors: product?.availableColors || []
@@ -123,6 +127,16 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                     label="* Brand"
                   />
                 </div>
+              </div>
+              <div className="product-form-field">
+                <Field
+                disabled={isLoading}
+                  name="addedBy"
+                  id="addedBy"
+                  rows={3}
+                  label="Your Email"
+                  component={CustomInput}
+                />
               </div>
               <div className="product-form-field">
                 <Field
@@ -244,7 +258,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   />
                   <label htmlFor="featured">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Featured &nbsp;
+                      &nbsp; Add to Creative &nbsp;
                     </h5>
                   </label>
                 </div>
@@ -258,7 +272,7 @@ const ProductForm = ({ product, onSubmit, isLoading }) => {
                   />
                   <label htmlFor="recommended">
                     <h5 className="d-flex-grow-1 margin-0">
-                      &nbsp; Add to Recommended &nbsp;
+                      &nbsp; Add to Scrapyard &nbsp;
                     </h5>
                   </label>
                 </div>
@@ -317,6 +331,7 @@ ProductForm.propTypes = {
   product: PropType.shape({
     name: PropType.string,
     brand: PropType.string,
+    addedBy:PropType.string,
     price: PropType.number,
     maxQuantity: PropType.number,
     description: PropType.string,
@@ -330,7 +345,7 @@ ProductForm.propTypes = {
     availableColors: PropType.arrayOf(PropType.string)
   }).isRequired,
   onSubmit: PropType.func.isRequired,
-  isLoading: PropType.bool.isRequired
+  isLoading: PropType.bool.isRequired,
 };
 
 export default ProductForm;

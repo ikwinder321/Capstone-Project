@@ -11,24 +11,25 @@ const AdminNavigation = () => {
     profile: state.profile
   }));
 
-  return (
-    <nav className="navigation navigation-admin">
-      <div className="logo">
-        <Link to={ADMIN_DASHBOARD} style={{ display: 'flex', alignItems: 'center' }}>
-          <img alt="Logo" src={logo} />
-          <h3>ADMIN PANEL</h3>
-        </Link>
-      </div>
-      <ul className="navigation-menu">
-        <li className="navigation-menu-item">
-          <UserAvatar
-            isAuthenticating={isAuthenticating}
-            profile={profile}
-          />
-        </li>
-      </ul>
-    </nav>
-  );
+  // return (
+  //   <nav className="navigation navigation-admin">
+  //     <div className="logo">
+  //       <Link to={ADMIN_DASHBOARD} style={{ display: 'flex', alignItems: 'center' }}>
+  //         <img alt="Logo" src={logo} />
+  //         <h3>ADMIN PANEL</h3>
+  //       </Link>
+  //     </div>
+  //     <ul className="navigation-menu">
+  //       <li className="navigation-menu-item">
+  //         <UserAvatar
+  //           isAuthenticating={isAuthenticating}
+  //           profile={profile}
+  //         />
+  //       </li>
+  //     </ul>
+  //   </nav>
+  // );
+  return null;
 };
 
 export default AdminNavigation;

@@ -38,7 +38,14 @@ class Firebase {
 
   getUser = (id) => this.db.collection("users").doc(id).get();
 
-  passwordUpdate = (password) => this.auth.currentUser.updatePassword(password);
+  addSeller = (productSellerEmail, productId) => 
+  this.db.collection("soldProducts").doc(productSellerEmail).set(productId);
+
+  addOrders = (buyer, product) =>{
+  this.db.collection("orders").doc(buyer).set(product);
+  }
+
+  passwordUpdate = (  password) => this.auth.currentUser.updatePassword(password);
 
   changePassword = (currentPassword, newPassword) =>
     new Promise((resolve, reject) => {
@@ -54,6 +61,11 @@ class Firebase {
         })
         .catch((error) => reject(error));
     });
+
+    getCurrentUser = () =>{
+      const user = this.auth.currentUser;
+      return user.email.toString();
+    }
 
   reauthenticate = (currentPassword) => {
     const user = this.auth.currentUser;
@@ -104,7 +116,7 @@ class Firebase {
 
   getSingleProduct = (id) => this.db.collection("products").doc(id).get();
 
-  getProducts = (lastRefKey) => {
+  getProducts = (lastRefKey, checki) => {
     let didTimeout = false;
 
     return new Promise((resolve, reject) => {
@@ -112,7 +124,7 @@ class Firebase {
         if (lastRefKey) {
           try {
             const query = this.db
-              .collection("products")
+              .collection(checki)
               .orderBy(app.firestore.FieldPath.documentId())
               .startAfter(lastRefKey)
               .limit(12);
@@ -138,7 +150,7 @@ class Firebase {
             const totalQuery = await this.db.collection("products").get();
             const total = totalQuery.docs.length;
             const query = this.db
-              .collection("products")
+              .collection(checki)
               .orderBy(app.firestore.FieldPath.documentId())
               .limit(12);
             const snapshot = await query.get();

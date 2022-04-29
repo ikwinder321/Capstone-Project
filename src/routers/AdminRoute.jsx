@@ -34,7 +34,7 @@ const mapStateToProps = ({ auth }) => ({
 
 AdminRoute.defaultProps = {
   isAuth: false,
-  role: 'USER'
+  role: 'ADMIN'
 };
 
 AdminRoute.propTypes = {

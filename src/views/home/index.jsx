@@ -5,13 +5,13 @@ import { FEATURED_PRODUCTS, RECOMMENDED_PRODUCTS, SHOP } from 'constants/routes'
 import {
   useDocumentTitle, useFeaturedProducts, useRecommendedProducts, useScrollTop
 } from 'hooks';
-import bannerImg from 'images/banner-girl.png';
+import bannerImg from 'images/soaps.jpg';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 
 const Home = () => {
-  useDocumentTitle('yeasin-shop | Home');
+  useDocumentTitle('Trash To Treasure | Home');
   useScrollTop();
 
   const {
@@ -33,13 +33,12 @@ const Home = () => {
         <div className="banner">
           <div className="banner-desc">
             <h1 className="text-thin">
-              <strong>See</strong>
-              &nbsp;everything with&nbsp;
-              <strong>Clarity</strong>
+              <strong>Hi</strong>
+              &nbsp;
+              <strong>There</strong>
             </h1>
             <p>
-              Buying eyewear should leave you happy and good-looking, with money in your pocket.
-              Glasses, sunglasses, and contacts—we’ve got your eyes covered.
+            Welcome to the world where Buyer and Sellers unite to buy and sell Creative and Scrapyard products.
             </p>
             <br />
             <Link to={SHOP} className="button">
@@ -51,7 +50,7 @@ const Home = () => {
         </div>
         <div className="display">
           <div className="display-header">
-            <h1>Featured Products</h1>
+            <h1>Creative Products</h1>
             <Link to={FEATURED_PRODUCTS}>See All</Link>
           </div>
           {(errorFeatured && !isLoadingFeatured) ? (
@@ -69,7 +68,7 @@ const Home = () => {
         </div>
         <div className="display">
           <div className="display-header">
-            <h1>Recommended Products</h1>
+            <h1>Scrapyard Products</h1>
             <Link to={RECOMMENDED_PRODUCTS}>See All</Link>
           </div>
           {(errorRecommended && !isLoadingRecommended) ? (

@@ -54,7 +54,7 @@ const Navigation = () => {
     ROUTE.FORGOT_PASSWORD
   ];
 
-  if (store.user && store.user.role === 'ADMIN') {
+  if (store.user && store.user.role === 'LOL') {
     return null;
   } if (window.screen.width <= 800) {
     return (
@@ -74,8 +74,9 @@ const Navigation = () => {
       <ul className="navigation-menu-main">
         <li><NavLink activeClassName="navigation-menu-active" exact to={ROUTE.HOME}>Home</NavLink></li>
         <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.SHOP}>Shop</NavLink></li>
-        <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.FEATURED_PRODUCTS}>Featured</NavLink></li>
-        <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.RECOMMENDED_PRODUCTS}>Recommended</NavLink></li>
+        <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.FEATURED_PRODUCTS}>Creative</NavLink></li>
+        <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.RECOMMENDED_PRODUCTS}>Scrapyard</NavLink></li>
+        <li><NavLink activeClassName="navigation-menu-active" to={ROUTE.SELLER}>Seller</NavLink> </li>
       </ul>
       {(pathname === ROUTE.SHOP || pathname === ROUTE.SEARCH) && (
         <FiltersToggle>
@@ -86,13 +87,14 @@ const Navigation = () => {
         </FiltersToggle>
       )}
       <SearchBar />
+      
       <ul className="navigation-menu">
         <li className="navigation-menu-item">
           <BasketToggle>
             {({ onClickToggle }) => (
               <button
                 className="button-link navigation-menu-link basket-toggle"
-                disabled={basketDisabledpathnames.includes(pathname)}
+                //disabled={basketDisabledpathnames.includes(pathname)}
                 onClick={onClickToggle}
                 type="button"
               >

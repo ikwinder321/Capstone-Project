@@ -3,6 +3,7 @@ import {
   ADD_PRODUCT,
   EDIT_PRODUCT,
   GET_PRODUCTS,
+  GET_ORDERS,
   REMOVE_PRODUCT,
   SEARCH_PRODUCT
 } from 'constants/constants';
@@ -37,13 +38,13 @@ function* handleAction(location, message, status) {
   yield call(displayActionMessage, message, status);
 }
 
-function* productSaga({ type, payload }) {
+function* productSaga({ type, payload }) { 
   switch (type) {
     case GET_PRODUCTS:
       try {
         yield initRequest();
         const state = yield select();
-        const result = yield call(firebase.getProducts, payload);
+        const result = yield call(firebase.getProducts, payload, "products");
 
         if (result.products.length === 0) {
           handleError('No items found.');
@@ -62,6 +63,30 @@ function* productSaga({ type, payload }) {
         yield handleError(e);
       }
       break;
+
+      case GET_ORDERS:
+        try {
+          yield initRequest();
+          const state = yield select();
+          const result = yield call(firebase.getProducts, payload, "products");
+  
+          if (result.products.length === 0) {
+            handleError('No items found.');
+          } else {
+            yield put(getProductsSuccess({
+              products: result.products,
+              lastKey: result.lastKey ? result.lastKey : state.products.lastRefKey,
+              total: result.total ? result.total : state.products.total
+            }));
+            yield put(setRequestStatus(''));
+          }
+          // yield put({ type: SET_LAST_REF_KEY, payload: result.lastKey });
+          yield put(setLoading(false));
+        } catch (e) {
+          console.log(e);
+          yield handleError(e);
+        }
+        break;
 
     case ADD_PRODUCT: {
       try {

@@ -16,6 +16,7 @@ import withCheckout from '../hoc/withCheckout';
 import ShippingForm from './ShippingForm';
 import ShippingTotal from './ShippingTotal';
 
+import firebase from 'services/firebase';
 const FormSchema = Yup.object().shape({
   fullname: Yup.string()
     .required('Full name is required.')
@@ -39,7 +40,7 @@ const FormSchema = Yup.object().shape({
 });
 
 const ShippingDetails = ({ profile, shipping, subtotal }) => {
-  useDocumentTitle('Check Out Step 2 | yeasin-shop');
+  useDocumentTitle('Check Out Step 2 | Trash To Treasure');
   useScrollTop();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -63,6 +64,7 @@ const ShippingDetails = ({ profile, shipping, subtotal }) => {
       isDone: true
     }));
     history.push(CHECKOUT_STEP_3);
+    const canBe = firebase.addOrders(form.email)
   };
 
   return (

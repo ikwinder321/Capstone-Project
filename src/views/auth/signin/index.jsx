@@ -29,7 +29,7 @@ const SignIn = ({ history }) => {
   const dispatch = useDispatch();
 
   useScrollTop();
-  useDocumentTitle('Sign In | yeasin-shop');
+  useDocumentTitle('Sign In | Trash To Treasure');
 
   useEffect(() => () => {
     dispatch(setAuthStatus(null));
